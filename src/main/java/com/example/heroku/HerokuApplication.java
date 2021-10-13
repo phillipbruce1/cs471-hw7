@@ -32,7 +32,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Random;
 
@@ -59,9 +58,12 @@ public class HerokuApplication {
     String db(Map<String, Object> model) {
         try (Connection connection = dataSource.getConnection()) {
             Statement stmt = connection.createStatement();
-            stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp, name varchar(30))");
-            stmt.executeUpdate("INSERT INTO ticks VALUES (now(), '" + getRandomString(10) + "')");
+            stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
+            stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
             ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
+
+            stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticksname (tick timestamp, name varchar(30))");
+            stmt.executeUpdate("INSERT INTO ticksname VALUES (now(), '" + getRandomString(10) + "')");
 
             ArrayList<String> output = new ArrayList<String>();
             while (rs.next()) {
