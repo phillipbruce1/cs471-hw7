@@ -60,7 +60,7 @@ public class HerokuApplication {
             Statement stmt = connection.createStatement();
             stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp, name varchar(30))");
             stmt.executeUpdate("INSERT INTO ticks VALUES (now(), '" + getRandomString(10) + "')");
-            ResultSet rs = stmt.executeQuery("SELECT ticksname FROM ticks");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM ticks");
 
 //            stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticksname (tick timestamp, name varchar(30))");
 //            stmt.executeUpdate("INSERT INTO ticksname VALUES (now(), '" + getRandomString(10) + "')");
