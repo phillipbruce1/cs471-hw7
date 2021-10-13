@@ -58,8 +58,8 @@ public class HerokuApplication {
     String db(Map<String, Object> model) {
         try (Connection connection = dataSource.getConnection()) {
             Statement stmt = connection.createStatement();
-            stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticksname (tick timestamp, name varchar(30))");
-            stmt.executeUpdate("INSERT INTO ticksname VALUES (now(), '" + getRandomString(10) + "')");
+            stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp, name varchar(30))");
+            stmt.executeUpdate("INSERT INTO ticks VALUES (now(), '" + getRandomString(10) + "')");
             ResultSet rs = stmt.executeQuery("SELECT ticksname FROM ticks");
 
 //            stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticksname (tick timestamp, name varchar(30))");
